@@ -22,11 +22,13 @@ if [ -n "$include_checks" ]; then
 fi
 echo "flags: $flags"
 
+set +e
 if [ -n "$flags" ]; then
-    output=$(unbuffer oasdiff breaking "$base" "$revision" $flags)
+    output=$(unbuffer oasdiff breaking "$base" "$revision" $flags 2>&1)
 else
-    output=$(unbuffer oasdiff breaking "$base" "$revision")
+    output=$(unbuffer oasdiff breaking "$base" "$revision" 2>&1)
 fi
+set -e
 
 echo "$output"
 
