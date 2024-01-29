@@ -32,6 +32,10 @@ set -e
 
 echo "$output"
 
+if [[ "$output" == Error* ]]; then
+    exit 1
+fi
+
 # GitHub Actions limits output to 1MB
 # We count bytes because unicode has multibyte characters
 size=$(echo "$output" | wc -c)
